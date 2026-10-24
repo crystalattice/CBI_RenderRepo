@@ -1,0 +1,29 @@
+{
+  "title": "Combine two images with an overlay",
+  "summary": "Paste a second rectangular image onto a base image at an x/y position. Base dimensions are preserved.",
+  "tasks": [
+    "combine pictures",
+    "overlay images",
+    "paste image onto image"
+  ],
+  "tags": [
+    "combine",
+    "overlay",
+    "paste"
+  ],
+  "required_inputs": [
+    "Base: upload or select the background image.",
+    "Overlay: upload or select the image to paste.",
+    "Place overlay: change x and y in pixels from the top left; keep resize_source false for original overlay size."
+  ],
+  "examples": [
+    "combine pictures",
+    "overlay images",
+    "paste image onto image"
+  ],
+  "limitations": [
+    "Opaque rectangular paste; transparency is not used without wiring a mask.",
+    "The overlay is clipped at base edges; this does not expand a canvas or make a side-by-side layout.",
+    "Requires a working Comfy runtime with the named core nodes. No models or custom node dependencies."
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "title": "Center-crop a portrait",
+  "summary": "Crop the center to a target aspect ratio and resize to the chosen dimensions. Default is a 100 by 200 portrait.",
+  "tasks": [
+    "crop portrait",
+    "center crop image",
+    "crop to aspect ratio"
+  ],
+  "tags": [
+    "crop",
+    "portrait",
+    "aspect",
+    "ratio"
+  ],
+  "required_inputs": [
+    "LoadImage: upload or select an image.",
+    "Center crop: set width and height to the desired ratio and output dimensions. Keep crop center."
+  ],
+  "examples": [
+    "crop portrait",
+    "center crop image",
+    "crop to aspect ratio"
+  ],
+  "limitations": [
+    "Always centered; cannot choose a face or move the crop.",
+    "May resize after cropping; no padding, subject detection or AI.",
+    "Requires a working Comfy runtime with the named core nodes. No models or custom node dependencies."
+  ]
+}

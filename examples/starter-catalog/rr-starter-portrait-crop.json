@@ -1,0 +1,146 @@
+{
+  "last_node_id": 3,
+  "last_link_id": 2,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "title": "Choose input image",
+      "pos": [
+        30,
+        80
+      ],
+      "size": [
+        300,
+        310
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage",
+        "cnr_id": "comfy-core",
+        "ver": "52f98af2e2e42c421070a3e147c161c47cdeaf22"
+      },
+      "widgets_values": [
+        "rr-starter-base.png",
+        "image"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "ImageScale",
+      "title": "Center crop \u2014 width/height = target ratio",
+      "pos": [
+        390,
+        80
+      ],
+      "size": [
+        300,
+        180
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            2
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScale",
+        "cnr_id": "comfy-core",
+        "ver": "52f98af2e2e42c421070a3e147c161c47cdeaf22"
+      },
+      "widgets_values": [
+        "nearest-exact",
+        100,
+        200,
+        "center"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "SaveImage",
+      "title": "Save portrait crop",
+      "pos": [
+        750,
+        80
+      ],
+      "size": [
+        300,
+        310
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 2
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage",
+        "cnr_id": "comfy-core",
+        "ver": "52f98af2e2e42c421070a3e147c161c47cdeaf22"
+      },
+      "widgets_values": [
+        "rr-starter/portrait-crop/portrait"
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "IMAGE"
+    ],
+    [
+      2,
+      2,
+      0,
+      3,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

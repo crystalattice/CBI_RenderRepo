@@ -1,0 +1,28 @@
+{
+  "title": "Resize an image",
+  "summary": "Resize to exact pixel dimensions without cropping. Set one dimension to 0 to preserve aspect ratio.",
+  "tasks": [
+    "resize photo",
+    "make image smaller",
+    "change image dimensions"
+  ],
+  "tags": [
+    "resize",
+    "dimensions",
+    "smaller"
+  ],
+  "required_inputs": [
+    "LoadImage: upload or select an image.",
+    "Resize: change width and height; set height to 0 to preserve aspect ratio. Choose upscale_method for interpolation; keep crop disabled."
+  ],
+  "examples": [
+    "resize photo",
+    "make image smaller",
+    "change image dimensions"
+  ],
+  "limitations": [
+    "Exact nonzero width and height can stretch the image.",
+    "Resampling only; no AI enhancement or restoration.",
+    "Requires a working Comfy runtime with the named core nodes. No models or custom node dependencies."
+  ]
+}
