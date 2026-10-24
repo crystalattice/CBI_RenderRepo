@@ -43,10 +43,10 @@ Node.js with its built-in test runner is required for the five frontend suites (
 - [Additional permutation tooling](docs/PERMUTATION_V0.md), separate from installation
 - [Sanitized demo evidence and uncertainty](docs/DEMO_EVIDENCE.md)
 - [Release contents and validation](RELEASE_MANIFEST.json)
-- [Later GitHub creation/push instructions](docs/PUBLISH_LATER.md) — no repository has been created or remote configured by this preparation
+- [Public repository and contest handoff](docs/PUBLISH_LATER.md) — source publication is complete; demo and submission tasks remain
 
 ## License and publication review
 
 Application source license: **GPL-3.0-only**; see [LICENSE](LICENSE). Cody authorized this license change and confirmed the other license information. Publisher/maintainer branding does not replace third-party authorship. Existing third-party notices are preserved; see [notices](THIRD_PARTY_NOTICES.md) and [the recorded release review](docs/REVIEW_BEFORE_PUBLICATION.md).
 
-This is a locally prepared release candidate. Technical checks do not constitute legal clearance or a promise that a workflow renders, fits memory or performs well. Graph execution, hardware suitability and performance of the contest workflow remain untested. No public repository, video, social post or contest submission is created by the setup/test commands above.
+This public repository contains the locally prepared release. Technical checks do not constitute legal clearance or a promise that a workflow renders, fits memory or performs well. Graph execution, hardware suitability and performance of the contest workflow remain untested. The setup and test commands do not publish a demo video, create a social post or submit the contest entry.

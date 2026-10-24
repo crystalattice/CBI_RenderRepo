@@ -5,3 +5,15 @@ __pycache__/
 build/
 dist/
 .local-artifacts/
+
+# Runtime data, secrets and weights never belong in this source repository.
+.renderrepo/
+.env
+.env.*
+!.env.example
+/models/
+/captures/
+*.safetensors
+*.ckpt
+*.pt
+*.pth

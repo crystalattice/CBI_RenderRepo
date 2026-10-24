@@ -1,18 +1,14 @@
-# Create and push later — instructions only
+# Public repository and contest handoff
 
-No GitHub repository was created, no remote is configured and nothing was pushed/published by this preparation.
+The source release is public at [github.com/crystalattice/CBI_RenderRepo](https://github.com/crystalattice/CBI_RenderRepo), on the `main` branch. The repository contains the CBI_RenderRepo application, its ComfyUI integration and workflow files, GPL-3.0-only license, setup instructions, tests and preserved third-party notices. Model weights and the ComfyUI runtime are not included.
 
-The [license and attribution review](REVIEW_BEFORE_PUBLICATION.md) records Cody’s confirmation and GPL-3.0-only decision. When Cody separately authorizes publication:
+GitHub history records repository setup, source upload and release maintenance. The private development history was not imported. The release manifest inventories the exact published source files and records the locally completed verification; it does not claim a fresh public-clone rehearsal.
 
-1. Sign into the intended GitHub account/organization and create **CBI_RenderRepo** as an empty repository. Do not initialize it with a README, license or gitignore: those are already in the clean initial commit.
-2. Review the local commit and author placeholder. The approved current identity is Chippie Bear Industries, LLC, `maintainers@cbi-renderrepo.invalid`; that address is intentionally non-contact. If changing it, explicitly set the desired repository-local identity and amend the unpublished initial commit before continuing.
-3. In the local CBI_RenderRepo directory, inspect `git status`, `git log --oneline` and `git remote -v`. There should be one root commit and no remote. Substitute the real owner in these **future** commands:
+## Remaining contest steps
 
-   ```bash
-   git remote add origin https://github.com/YOUR_OWNER/CBI_RenderRepo.git
-   git push -u origin main
-   ```
+- Rehearse setup from an anonymous fresh clone and confirm the instructions still work on another local ComfyUI installation.
+- Publish a current demo video of no more than two minutes. The current captioned take is 110 seconds and has no voiceover; graph execution, hardware suitability and performance remain untested.
+- Publish a social post linking the video and including `#OpenSourceHiggsfield`.
+- Cody must personally review and accept the entrant terms, confirm the one-submission requirement, provide the final links and complete the contest form.
 
-4. Verify the exact commit and source/setup/workflow files anonymously from the public URL, then rehearse setup from a new public clone. Review any branch protections or visibility settings yourself.
-
-These instructions are not authorization to execute them now. Repository publication, video publication, social posting, contest agreements and final submission remain separate actions. The source ZIP excludes .git storage; use the prepared local repository to retain the clean initial commit, or initialize the extracted ZIP yourself later if needed.
+The contest rules allow a local ComfyUI integration; a hosted try-it endpoint is optional. Do not describe model fingerprint reuse as upstream identity verification, or opening the graph as proof that it executes successfully.

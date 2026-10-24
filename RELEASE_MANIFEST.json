@@ -2,15 +2,16 @@
   "project": "CBI_RenderRepo",
   "publisher_maintainer": "Chippie Bear Industries, LLC",
   "version": "0.1.0",
-  "status": "local release candidate; owner confirms license information; not published",
+  "status": "public GitHub source release; contest submission pending",
   "license": "GPL-3.0-only",
   "license_text_unchanged": false,
-  "initial_history": "One new root commit; no development history; no remote. Commit ID recorded in the adjacent delivery manifest.",
+  "initial_history": "Public main history records repository setup, source upload, ignore-file maintenance and release-record maintenance. Private development history was not imported.",
   "commit_identity": {
     "name": "Chippie Bear Industries, LLC",
     "email": "maintainers@cbi-renderrepo.invalid",
     "contact_address": false,
-    "approved_by_user": true
+    "approved_by_user": true,
+    "scope": "The approved placeholder identity applies only to the locally prepared release commit; public GitHub commit authors are shown in the repository history."
   },
   "runtime_compatibility_ids": {
     "python_module": "renderrepo",
@@ -67,8 +68,11 @@
   "validation": {
     "python": {
       "command": "python -m unittest discover -s tests -q",
-      "passed": 376,
-      "failed": 0
+      "passed": 375,
+      "skipped": 1,
+      "total": 376,
+      "failed": 0,
+      "skip": "One optional test skipped."
     },
     "node": {
       "command": "PATH=\"$PWD/.venv/bin:$PATH\" node --test tests/test_storefront_prompt.cjs tests/test_storefront_adapter.cjs tests/test_comfy_frontend.cjs tests/test_comparison_frontend.cjs tests/test_permutation_frontend.cjs",
@@ -86,7 +90,7 @@
       "graph_submissions": 0,
       "node_evidence": "minimized offline input schema fixture"
     },
-    "fresh_checkout": "Final exact-commit verification is recorded in the adjacent delivery manifest. Native Comfy is an existing prerequisite; no new runtime/model provisioning is claimed."
+    "fresh_checkout": "Locally tested release candidate commit e4cbc3908d210c696e8fb64599321528193399ef: Python 375 passed/1 skipped; Node 70 passed/1 skipped; offline import/export passed. The public follow-up updates release documentation and metadata and completes .gitignore; application code, tests and workflow bytes are unchanged, so automated suites were not rerun for this documentation/metadata update. A fresh anonymous public-clone setup rehearsal remains pending."
   },
   "audit": {
     "unexplained_secret_or_private_data_findings": [],
@@ -174,9 +178,10 @@
     "scope": "Source/content/pattern and metadata audit; no legal clearance implied."
   },
   "unresolved_review_items": [
-    "Public release authorization remains separate; no GitHub, remote, push, social post, terms or submission performed."
+    "Anonymous fresh-clone setup rehearsal remains pending.",
+    "Demo video publication, required social post with #OpenSourceHiggsfield, entrant terms and final contest submission remain pending."
   ],
-  "inventory_hash_rule": "SHA-256 of exact regular-file bytes. RELEASE_MANIFEST.json is listed without its own hash to avoid self-reference; Git commit and external ZIP digest cover it.",
+  "inventory_hash_rule": "SHA-256 of exact regular-file bytes. RELEASE_MANIFEST.json has a null self-hash to avoid self-reference; the GitHub tree and commit record its exact bytes.",
   "included_files": [
     {
       "path": ".gitignore",
@@ -190,13 +195,13 @@
     },
     {
       "path": "README.md",
-      "size_bytes": 4693,
-      "sha256": "496e0ac28d50d215e587b7d180d924c435c8208556d22c015f117dd5ab55d305"
+      "size_bytes": 4699,
+      "sha256": "389a3f455f2883892ab5ec88e4cd9df007e70aaac9a4c98657fa0d20fb177bc2"
     },
     {
       "path": "RELEASE_MANIFEST.json",
       "sha256": null,
-      "reason": "Self-reference excluded; covered by initial commit and ZIP digest."
+      "reason": "Self-reference excluded; exact bytes are recorded in the GitHub tree and commit."
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -205,8 +210,8 @@
     },
     {
       "path": "docs/AUDIT_SUMMARY.md",
-      "size_bytes": 3167,
-      "sha256": "22f30b745458190fabbdb0a08f12f9e6a78b8c24057d3afc12301809f15760d6"
+      "size_bytes": 3297,
+      "sha256": "699f6a953d69b40fa227762193892d0a182ad0c3b5228c5103d22a9c548ef372"
     },
     {
       "path": "docs/CLI_REFERENCE.md",
@@ -235,13 +240,13 @@
     },
     {
       "path": "docs/PUBLISH_LATER.md",
-      "size_bytes": 1749,
-      "sha256": "c66147c9aced5bf67ad6a3471e0acbaf50c4787d1ca61a73316d4a0793e71df2"
+      "size_bytes": 1535,
+      "sha256": "b17ab0bea5e9a84dd039bbddd7bd1a14fc0734aa8b45b1ea282f945a70596948"
     },
     {
       "path": "docs/REVIEW_BEFORE_PUBLICATION.md",
-      "size_bytes": 2503,
-      "sha256": "f18cff4b7a392913a6c16a34268b1701bfe59a57b72c3e9d49ac37ff970bc325"
+      "size_bytes": 2643,
+      "sha256": "109ec5823936c60f6aa97caeb09c21fac34790ac25f6acd9cce0ce53364e8ce7"
     },
     {
       "path": "docs/S4_CAPSULE.md",
@@ -780,5 +785,10 @@
       "model/dependency license information",
       "project license decision: GPL-3.0-only"
     ]
+  },
+  "publication": {
+    "repository_url": "https://github.com/crystalattice/CBI_RenderRepo",
+    "visibility": "public",
+    "default_branch": "main"
   }
 }
