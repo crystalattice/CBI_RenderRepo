@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "CBI_RenderRepo"
+version = "0.1.0"
+description = "CBI_RenderRepo: workflow package review and installation for ComfyUI"
+readme = "README.md"
+maintainers = [{name = "Chippie Bear Industries, LLC"}]
+requires-python = ">=3.13"
+dependencies = ["PyYAML>=6.0,<7"]
+license = "GPL-3.0-only"
+
+[project.optional-dependencies]
+sdk = ["comfy-sdk==0.4.0"]
+test = ["aiohttp>=3.9,<4", "jsonschema>=4,<5", "Pillow>=10,<13"]
+
+[project.scripts]
+renderrepo = "renderrepo.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["renderrepo*"]
+
+[tool.setuptools.package-data]
+"renderrepo" = ["starter_profiles/*.json", "starter_profiles/*.png", "schemas/*.json", "storefront/*.html", "storefront/*.css", "storefront/*.js"]
+"renderrepo.permutation" = ["*.html", "*.js", "*.css"]

@@ -1,0 +1,784 @@
+{
+  "project": "CBI_RenderRepo",
+  "publisher_maintainer": "Chippie Bear Industries, LLC",
+  "version": "0.1.0",
+  "status": "local release candidate; owner confirms license information; not published",
+  "license": "GPL-3.0-only",
+  "license_text_unchanged": false,
+  "initial_history": "One new root commit; no development history; no remote. Commit ID recorded in the adjacent delivery manifest.",
+  "commit_identity": {
+    "name": "Chippie Bear Industries, LLC",
+    "email": "maintainers@cbi-renderrepo.invalid",
+    "contact_address": false,
+    "approved_by_user": true
+  },
+  "runtime_compatibility_ids": {
+    "python_module": "renderrepo",
+    "cli": "renderrepo",
+    "capsule_profile": "renderrepo",
+    "capsule_schema_version": 1,
+    "reviewed_ui_name": "RenderRepo"
+  },
+  "workflow": {
+    "path": "workflows/image_z_image_turbo.json",
+    "regression_copy": "tests/fixtures/image_z_image_turbo.json",
+    "sha256": "04e34c77bf2304f9cfea972db0c02e3fef3ffae88e59406e0121a58d7c48b9cd",
+    "original_bytes_preserved": true,
+    "execution_hardware_performance": "untested"
+  },
+  "included_categories": [
+    "Application Python package and JavaScript/CSS/HTML storefront",
+    "Comfy entry point and integration assets",
+    "Unchanged contest JSON and real-export regression fixtures",
+    "Schema, procedural starter profiles, inputs and small expected-output fixtures",
+    "Relevant core backend/frontend tests and their portable helpers",
+    "Portable install/use/development/contracts/evidence documentation",
+    "GPL version 3 text, preserved third-party notices and owner-confirmed release review",
+    "Test/runtime dependency pins; no dependency distributions"
+  ],
+  "excluded_categories": [
+    "Development .git history, remotes, IDE and agent settings",
+    "Local artifacts, recordings, raw screenshots, logs and personal/environment data",
+    "Model binaries, native Comfy checkout, target snapshots, receipts, sessions and caches",
+    "Virtualenvs, build/egg-info/bytecode outputs and platform/credential configuration",
+    "Standalone storefront prototypes and design/handoff archives",
+    "Historical billable/native operator and recording scripts, WIP/external adapter helpers",
+    "Old private audit reports/checklists and their machine-specific paths",
+    "Optional SDK example/runtime captures and older standalone demonstration assets",
+    "Original uv.lock: optional/development lock replaced by tested dependency pins"
+  ],
+  "excluded_tests": [
+    "browser_storefront.py",
+    "test_core_image_demo.py",
+    "test_node_smoke_fixture.py",
+    "test_permutation_audit.py",
+    "test_repository_rehearsal.py",
+    "test_ux_fixture.py"
+  ],
+  "release_only_changes": [
+    "Public distribution/project maintainer metadata and portable documentation",
+    "Generic source-path UI placeholder; reviewed layout/UI label retained",
+    "Minimized offline object_info fixture removes unrelated local model catalog",
+    "Starter ranking assertion permits legitimate secondary crop matches",
+    "Installer HTTP fixture uses a linked capsule revision rather than mutating a sealed capsule",
+    "Portable no-model raw-JSON import/export verification helper",
+    "Owner-authorized GPL-3.0-only license/metadata/SPDX update and recorded confirmation of other license information"
+  ],
+  "validation": {
+    "python": {
+      "command": "python -m unittest discover -s tests -q",
+      "passed": 376,
+      "failed": 0
+    },
+    "node": {
+      "command": "PATH=\"$PWD/.venv/bin:$PATH\" node --test tests/test_storefront_prompt.cjs tests/test_storefront_adapter.cjs tests/test_comfy_frontend.cjs tests/test_comparison_frontend.cjs tests/test_permutation_frontend.cjs",
+      "passed": 70,
+      "skipped": 1,
+      "failed": 0,
+      "skip": "Optional standalone comparison HTTP-roundtrip fixture; backend HTTP tests run."
+    },
+    "import_export": {
+      "command": "python scripts/verify_release_import.py",
+      "result": "PASS",
+      "models_present": false,
+      "downloads": 0,
+      "workflow_installs": 0,
+      "graph_submissions": 0,
+      "node_evidence": "minimized offline input schema fixture"
+    },
+    "fresh_checkout": "Final exact-commit verification is recorded in the adjacent delivery manifest. Native Comfy is an existing prerequisite; no new runtime/model provisioning is claimed."
+  },
+  "audit": {
+    "unexplained_secret_or_private_data_findings": [],
+    "documented_synthetic_test_exceptions": [
+      {
+        "path": "tests/test_nodes.py",
+        "kind": "url_credential",
+        "explanation": "Explicit synthetic user:secret security regression cases."
+      },
+      {
+        "path": "tests/test_runtime.py",
+        "kind": "url_credential",
+        "explanation": "Explicit synthetic user:secret security regression cases."
+      }
+    ],
+    "broken_local_links": [],
+    "files_over_1_mib": [],
+    "binary_assets": [
+      {
+        "path": "examples/starter-catalog/rr-starter-base.png",
+        "size": [
+          320,
+          200
+        ],
+        "text_keys": []
+      },
+      {
+        "path": "examples/starter-catalog/rr-starter-overlay.png",
+        "size": [
+          80,
+          60
+        ],
+        "text_keys": []
+      },
+      {
+        "path": "examples/starter-catalog/outputs/portrait.png",
+        "size": [
+          100,
+          200
+        ],
+        "text_keys": [
+          "prompt",
+          "workflow"
+        ]
+      },
+      {
+        "path": "examples/starter-catalog/outputs/resized.png",
+        "size": [
+          160,
+          100
+        ],
+        "text_keys": [
+          "prompt",
+          "workflow"
+        ]
+      },
+      {
+        "path": "examples/starter-catalog/outputs/combined.png",
+        "size": [
+          320,
+          200
+        ],
+        "text_keys": [
+          "prompt",
+          "workflow"
+        ]
+      },
+      {
+        "path": "renderrepo/starter_profiles/rr-starter-base.png",
+        "size": [
+          320,
+          200
+        ],
+        "text_keys": []
+      },
+      {
+        "path": "renderrepo/starter_profiles/rr-starter-overlay.png",
+        "size": [
+          80,
+          60
+        ],
+        "text_keys": []
+      }
+    ],
+    "scope": "Source/content/pattern and metadata audit; no legal clearance implied."
+  },
+  "unresolved_review_items": [
+    "Public release authorization remains separate; no GitHub, remote, push, social post, terms or submission performed."
+  ],
+  "inventory_hash_rule": "SHA-256 of exact regular-file bytes. RELEASE_MANIFEST.json is listed without its own hash to avoid self-reference; Git commit and external ZIP digest cover it.",
+  "included_files": [
+    {
+      "path": ".gitignore",
+      "size_bytes": 241,
+      "sha256": "f3cd2250b53ba5cf44889f72ba2f61ecef286d61043d9ebe86eb826e33c13606"
+    },
+    {
+      "path": "LICENSE",
+      "size_bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 4693,
+      "sha256": "496e0ac28d50d215e587b7d180d924c435c8208556d22c015f117dd5ab55d305"
+    },
+    {
+      "path": "RELEASE_MANIFEST.json",
+      "sha256": null,
+      "reason": "Self-reference excluded; covered by initial commit and ZIP digest."
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "size_bytes": 2589,
+      "sha256": "a5458bd828e2b9a7a93580d5c725bd5dc33e6bf47401e062a554e4a2068fd70a"
+    },
+    {
+      "path": "docs/AUDIT_SUMMARY.md",
+      "size_bytes": 3167,
+      "sha256": "22f30b745458190fabbdb0a08f12f9e6a78b8c24057d3afc12301809f15760d6"
+    },
+    {
+      "path": "docs/CLI_REFERENCE.md",
+      "size_bytes": 17170,
+      "sha256": "b879267773bd498e862d2a033db14fb4881684f6dd942727fa59057bbcdf9ccc"
+    },
+    {
+      "path": "docs/DEMO_EVIDENCE.md",
+      "size_bytes": 3259,
+      "sha256": "332dcc9f47c992c355cf433b83f09366937e66fd67c11b926fbc26b479f11019"
+    },
+    {
+      "path": "docs/DEVELOPMENT.md",
+      "size_bytes": 3770,
+      "sha256": "aabc8632d62e848089f893e30e7dbadda9d8c7f2dbf9bf508582befca91627d5"
+    },
+    {
+      "path": "docs/PACKAGE_V0.md",
+      "size_bytes": 37934,
+      "sha256": "de6b28edc2546c4c075fd50a7c594576cf68251f8c72eb863de8851421cb9746"
+    },
+    {
+      "path": "docs/PERMUTATION_V0.md",
+      "size_bytes": 11193,
+      "sha256": "e81dc1e816092c723ee0eb4b85b58c684bdb6fed9a9214ef9667f13f851b5e62"
+    },
+    {
+      "path": "docs/PUBLISH_LATER.md",
+      "size_bytes": 1749,
+      "sha256": "c66147c9aced5bf67ad6a3471e0acbaf50c4787d1ca61a73316d4a0793e71df2"
+    },
+    {
+      "path": "docs/REVIEW_BEFORE_PUBLICATION.md",
+      "size_bytes": 2503,
+      "sha256": "f18cff4b7a392913a6c16a34268b1701bfe59a57b72c3e9d49ac37ff970bc325"
+    },
+    {
+      "path": "docs/S4_CAPSULE.md",
+      "size_bytes": 15315,
+      "sha256": "c5f75f0f773fa766e237a0b9cf11978c05733c62a4a51acbb5a4f7ef894df1d8"
+    },
+    {
+      "path": "docs/START_HERE.md",
+      "size_bytes": 33525,
+      "sha256": "bd9e7d915f78052c190bb71d5d87ec9cf703f76a7db0034f7fca2cb0ecff64d2"
+    },
+    {
+      "path": "examples/starter-catalog/generate_inputs.py",
+      "size_bytes": 923,
+      "sha256": "7cf5e2cf2b8a7a66d426676508c8c97b838e729eea3713b33e314e679771afe7"
+    },
+    {
+      "path": "examples/starter-catalog/outputs/combined.png",
+      "size_bytes": 6861,
+      "sha256": "b0ce7c6117a474c3a4e2ee5daf559c925c494f5351353e23a5fbc63509615d29"
+    },
+    {
+      "path": "examples/starter-catalog/outputs/portrait.png",
+      "size_bytes": 4788,
+      "sha256": "aad03e06f518f2146e3ceb50c090aa43ec776cbaecb510697b41a7531222d40d"
+    },
+    {
+      "path": "examples/starter-catalog/outputs/resized.png",
+      "size_bytes": 3919,
+      "sha256": "18067c3022bc5833a1cb3a72b6ca235331ca6dde6dd605f31635586f8d297697"
+    },
+    {
+      "path": "examples/starter-catalog/rr-starter-base.png",
+      "size_bytes": 2928,
+      "sha256": "20b0ca43bc25558318d75f241ff1cb76d1c13c69b1ea2c40dcdfa619ff850821"
+    },
+    {
+      "path": "examples/starter-catalog/rr-starter-overlay.discovery.json",
+      "size_bytes": 984,
+      "sha256": "67174970bc6e17a055300720b5f25fe9aa164429aad7028a1832107ee1cf496e"
+    },
+    {
+      "path": "examples/starter-catalog/rr-starter-overlay.json",
+      "size_bytes": 3512,
+      "sha256": "2848bbb2532ac7e4c5ba2a5cc68d40abdb17e46d87723a249cec0487acba8a3a"
+    },
+    {
+      "path": "examples/starter-catalog/rr-starter-overlay.png",
+      "size_bytes": 822,
+      "sha256": "6043800fb4ad6f77f0f7c6d67a71fbbdb17e210b0ce3e8d2602af1fe17330ca3"
+    },
+    {
+      "path": "examples/starter-catalog/rr-starter-portrait-crop.discovery.json",
+      "size_bytes": 862,
+      "sha256": "75b7e7068d553b6f9eed05b199e63dc697707379996d2935e76af03c710a0d99"
+    },
+    {
+      "path": "examples/starter-catalog/rr-starter-portrait-crop.json",
+      "size_bytes": 2559,
+      "sha256": "5a0a2318253441f48016ca5095acc8a7c2b7f7e0ca7007462396ba8486b5fdce"
+    },
+    {
+      "path": "examples/starter-catalog/rr-starter-resize.discovery.json",
+      "size_bytes": 866,
+      "sha256": "a5b884079d090c5e9f5a43a9aba5ee489e963cbd08b146e62600ec12e59092cb"
+    },
+    {
+      "path": "examples/starter-catalog/rr-starter-resize.json",
+      "size_bytes": 2554,
+      "sha256": "04c4418c5fbf45960c6b870d54c7a7caa656271ad8166dd749da1f25486b5e70"
+    },
+    {
+      "path": "examples/wan2.2-i2v/manifest.yaml",
+      "size_bytes": 2627,
+      "sha256": "e59ac605189a1f5d7fa6165691d190cda24e8453b9097a7925f319d2169c0fd4"
+    },
+    {
+      "path": "examples/wan2.2-i2v/workflow.json",
+      "size_bytes": 94002,
+      "sha256": "54ff162e64546b24389c38ca6a3cc86ebebbecfbdf643bdab12a6f7cac547537"
+    },
+    {
+      "path": "extensions/comfyui_renderrepo/README.md",
+      "size_bytes": 909,
+      "sha256": "35be8a0f4c68440650d26998e009a4b89f24c3ca323fa19f4c754bf20a8ed263"
+    },
+    {
+      "path": "extensions/comfyui_renderrepo/__init__.py",
+      "size_bytes": 328,
+      "sha256": "556f7df9747a405d2bb476cd9bffc13b1d9b0b437a773cb3dc23c658eba83db8"
+    },
+    {
+      "path": "extensions/comfyui_renderrepo/web/renderrepo.js",
+      "size_bytes": 110211,
+      "sha256": "9337676c6ebc079034a07041ab8aeaf334953bff955cddd1d506aa88c789aeb3"
+    },
+    {
+      "path": "pyproject.toml",
+      "size_bytes": 858,
+      "sha256": "fc12d3585b556a58c8f3aafe35531ff57579ab43752492be2453a27e2a86e831"
+    },
+    {
+      "path": "renderrepo/__init__.py",
+      "size_bytes": 47,
+      "sha256": "48a8925bac4055ed2609a6c65b74eb82567cd32bca2ba1aa7df65a0b45939efb"
+    },
+    {
+      "path": "renderrepo/__main__.py",
+      "size_bytes": 48,
+      "sha256": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d"
+    },
+    {
+      "path": "renderrepo/archive.py",
+      "size_bytes": 3675,
+      "sha256": "b9463aa5b6670828dc2af24815407b7ec276145f31b4bbd2170062db2cd300b2"
+    },
+    {
+      "path": "renderrepo/capabilities.py",
+      "size_bytes": 28570,
+      "sha256": "c6e671446e66407d66df526bac2ee942fb8a3512615433c158b9a3fe4cb1afa4"
+    },
+    {
+      "path": "renderrepo/capsule.py",
+      "size_bytes": 9843,
+      "sha256": "032d75fda791262c9402a0bec1efc3c383078056738709c52cde1ac83c6232d3"
+    },
+    {
+      "path": "renderrepo/cli.py",
+      "size_bytes": 23782,
+      "sha256": "d673c4ac7636bdcee809900e52b191c2599883055ba07677932b4d58167340bd"
+    },
+    {
+      "path": "renderrepo/comfy.py",
+      "size_bytes": 19248,
+      "sha256": "e5e8c783fd065847a2745459fad6f034010b3b22ad1254ad63d39378d3ac844b"
+    },
+    {
+      "path": "renderrepo/comfy_extension.py",
+      "size_bytes": 84993,
+      "sha256": "349e7d7fa95aa13b99cbc334cf7847fb81199706b0c47cddb1cd537fd8718ab6"
+    },
+    {
+      "path": "renderrepo/discovery.py",
+      "size_bytes": 3780,
+      "sha256": "b82d81687648de7af184d7c7beb8010456a525e71282c15590d24d06f9cbd4f7"
+    },
+    {
+      "path": "renderrepo/download.py",
+      "size_bytes": 15577,
+      "sha256": "9ed2463f50224dcd93143ec285226e8cf045b15fbcf4658fdd35475b24ac0a53"
+    },
+    {
+      "path": "renderrepo/installation_history.py",
+      "size_bytes": 4578,
+      "sha256": "9f83796df516454782ae5160765fe15e410475bb2f823b1c6ddf6cd31d5c4add"
+    },
+    {
+      "path": "renderrepo/installation_worker.py",
+      "size_bytes": 1662,
+      "sha256": "cda47d7488d33a5b0296c2dca2cd331f43effeb7c31b4c98b6c948be4ab6dab6"
+    },
+    {
+      "path": "renderrepo/local_test.py",
+      "size_bytes": 34923,
+      "sha256": "fed0da62b49093e3da15370f95da8f95602cf2ef151ccb69e6bba98e80dd9e28"
+    },
+    {
+      "path": "renderrepo/nodes.py",
+      "size_bytes": 8391,
+      "sha256": "c7b20509f4cf57b9b697e271483a9be6f726e609572fb4b6f8ee9a1ba4357f5e"
+    },
+    {
+      "path": "renderrepo/pack.py",
+      "size_bytes": 14219,
+      "sha256": "8291a6fc9180d16cecd75266539e938a25591f5dfb138f2b603dbc0f8fd360c3"
+    },
+    {
+      "path": "renderrepo/package_link.py",
+      "size_bytes": 1588,
+      "sha256": "4a84eedfadd798ba47ee66ebc6365d0366a8666a58c8fd755c0f11b66cda821d"
+    },
+    {
+      "path": "renderrepo/permutation/__init__.py",
+      "size_bytes": 61,
+      "sha256": "2b25d5fe7957751b09889d0ba0dee6aa3ac22fac22dd41b3e877bbf240f4745a"
+    },
+    {
+      "path": "renderrepo/permutation/__main__.py",
+      "size_bytes": 3994,
+      "sha256": "4efecad759f2f377adb278734c20f096db6cb1f471a4af4bb74b7cd111c8ad9b"
+    },
+    {
+      "path": "renderrepo/permutation/comparison-review.css",
+      "size_bytes": 568,
+      "sha256": "730503d28c9057a2117333f0df220e74024cd3d0e10cf4e76021919401711165"
+    },
+    {
+      "path": "renderrepo/permutation/comparison-review.js",
+      "size_bytes": 3086,
+      "sha256": "5b8c77d2e54f4a4a1ff1bbefc43fe13eb23f30cfc92cfac571e5c20055bbbd2f"
+    },
+    {
+      "path": "renderrepo/permutation/comparison.py",
+      "size_bytes": 12329,
+      "sha256": "7b6a2bbee1e6e29ef435f49b3e653a3eaaaebddb00b2484199f97ea40b5d8df8"
+    },
+    {
+      "path": "renderrepo/permutation/engine.py",
+      "size_bytes": 42367,
+      "sha256": "58226f5436b0caa7e32714b957f9e7af1a9f10192bcc21a6d5bdbf19715c242f"
+    },
+    {
+      "path": "renderrepo/permutation/provider.py",
+      "size_bytes": 6891,
+      "sha256": "273893a7e1130fede4a8ad73650abb92cc69d58722146b7182f6e4135b7c2ff4"
+    },
+    {
+      "path": "renderrepo/permutation/review.css",
+      "size_bytes": 466,
+      "sha256": "b44c4a78b609cb4185d444504ed924eaa450829ee17e51f38c05d97af11c3356"
+    },
+    {
+      "path": "renderrepo/permutation/review.html",
+      "size_bytes": 1023,
+      "sha256": "3ab5d04ea1c7b9ff24abe94f52cbdee483d9527e30235394aa6bd129377fa1fb"
+    },
+    {
+      "path": "renderrepo/permutation/review.js",
+      "size_bytes": 3826,
+      "sha256": "34189311762ac745333f0ea6a75aa55adbbb0a9754dad2e56f730bad599e1487"
+    },
+    {
+      "path": "renderrepo/permutation/review_server.py",
+      "size_bytes": 4774,
+      "sha256": "3f59a12ba6bb66f9cf3f0f5f603422c76212bbbc23250177d25ada19f3c4dd56"
+    },
+    {
+      "path": "renderrepo/readiness.py",
+      "size_bytes": 14089,
+      "sha256": "44b894666d752fe44994428a6fd2af71f484cf9e6f8587fcfd5faed0ac49b051"
+    },
+    {
+      "path": "renderrepo/receipts.py",
+      "size_bytes": 6535,
+      "sha256": "9b99a5a55cdb2dee22bdb2d8cb7abbdf58b7038a36c3428b18ce2605e8f0becf"
+    },
+    {
+      "path": "renderrepo/repository.py",
+      "size_bytes": 24372,
+      "sha256": "24bcad87481a589fa767d87db1fb087f93be0ed24b1898e839cdea1ea3e95b13"
+    },
+    {
+      "path": "renderrepo/runtime.py",
+      "size_bytes": 11134,
+      "sha256": "b1c3a4b968fe4594305349d764fa4d8648d8ce7cd99f7fc64912e41a30eb8ee8"
+    },
+    {
+      "path": "renderrepo/schemas/s4-capsule-v1.json",
+      "size_bytes": 6282,
+      "sha256": "b056007e10fcf9c3e47af3d7ba2c4fa6187e9360c2889f54fcd9737e900873e9"
+    },
+    {
+      "path": "renderrepo/sdk_execution.py",
+      "size_bytes": 14883,
+      "sha256": "fc5da37bf20a6e3a7f0eda4631a0dcf5a87ec981c737aa30d9b13a3ca3254682"
+    },
+    {
+      "path": "renderrepo/setup.py",
+      "size_bytes": 6959,
+      "sha256": "8eab9a269d4721c9e35a5aa2cfb3e91a340b150aa0b2c69c1571a0fb3cc0c50c"
+    },
+    {
+      "path": "renderrepo/starter_profiles/rr-starter-base.png",
+      "size_bytes": 2928,
+      "sha256": "20b0ca43bc25558318d75f241ff1cb76d1c13c69b1ea2c40dcdfa619ff850821"
+    },
+    {
+      "path": "renderrepo/starter_profiles/rr-starter-overlay.json",
+      "size_bytes": 3512,
+      "sha256": "2848bbb2532ac7e4c5ba2a5cc68d40abdb17e46d87723a249cec0487acba8a3a"
+    },
+    {
+      "path": "renderrepo/starter_profiles/rr-starter-overlay.png",
+      "size_bytes": 822,
+      "sha256": "6043800fb4ad6f77f0f7c6d67a71fbbdb17e210b0ce3e8d2602af1fe17330ca3"
+    },
+    {
+      "path": "renderrepo/starter_profiles/rr-starter-portrait-crop.json",
+      "size_bytes": 2559,
+      "sha256": "5a0a2318253441f48016ca5095acc8a7c2b7f7e0ca7007462396ba8486b5fdce"
+    },
+    {
+      "path": "renderrepo/starter_profiles/rr-starter-resize.json",
+      "size_bytes": 2554,
+      "sha256": "04c4418c5fbf45960c6b870d54c7a7caa656271ad8166dd749da1f25486b5e70"
+    },
+    {
+      "path": "renderrepo/storefront/adapter.js",
+      "size_bytes": 5146,
+      "sha256": "607913629b2ddfe76b61f9ec10f3d8eb95ba463bb90806a4fff95e0bf50263bf"
+    },
+    {
+      "path": "renderrepo/storefront/app.js",
+      "size_bytes": 36407,
+      "sha256": "eeb637ec75dc90e605b4855661ec4b60a2e627c014b8f47a02dc1f0a4e73bd76"
+    },
+    {
+      "path": "renderrepo/storefront/index.html",
+      "size_bytes": 3938,
+      "sha256": "b72bdb8f0a9d3789ed5cdfb5726874e78c34dd679ab534926b2980085f1cb440"
+    },
+    {
+      "path": "renderrepo/storefront/style.css",
+      "size_bytes": 21189,
+      "sha256": "270a0c03c7be486a94e24189beb24e77a910b8a2f6bd053d4a3ef6ed819e74cb"
+    },
+    {
+      "path": "requirements-test.txt",
+      "size_bytes": 361,
+      "sha256": "2968954e0f1b7e37c1f4a2832519a012c052792251be8907b71aa0c5afc7f2d7"
+    },
+    {
+      "path": "scripts/build_starter_catalog.py",
+      "size_bytes": 3197,
+      "sha256": "1a90f2e44976b8e522528834645674ef4457118fdeb619525a85c790ff29602f"
+    },
+    {
+      "path": "scripts/prepare_repository_gui_fixture.py",
+      "size_bytes": 2718,
+      "sha256": "7a280443da2eeefdc3febbae16f91bf546f2b6c33619d0a31711606d8150036a"
+    },
+    {
+      "path": "scripts/setup_renderrepo.py",
+      "size_bytes": 292,
+      "sha256": "259e11d82cb6fe7faa4c2e1b81ddbc2f392210332feb47f66fef5200bcb86338"
+    },
+    {
+      "path": "scripts/verify_release_import.py",
+      "size_bytes": 4465,
+      "sha256": "190c2e43d5baa7426711c011ff1b2039aba01725d72d65c6e30ff12204434aca"
+    },
+    {
+      "path": "tests/fixtures/README.md",
+      "size_bytes": 849,
+      "sha256": "ae45347dbfd8238f1a64aa06e4ca9fed7d8655d4a11360ae961cff673a3863a3"
+    },
+    {
+      "path": "tests/fixtures/comfy_analysis_object_info.json",
+      "size_bytes": 8883,
+      "sha256": "e0f9b378319ad554c1e8624f902c514aa2f451e72a7d61498b29ba525703dd5e"
+    },
+    {
+      "path": "tests/fixtures/image_flux2.json",
+      "size_bytes": 62986,
+      "sha256": "5cc63e16b6467dee4d41090932c20d87cb018e32ebc75d770e63445c7a34d833"
+    },
+    {
+      "path": "tests/fixtures/image_krea2_turbo_t2i.json",
+      "size_bytes": 71950,
+      "sha256": "6331a1c4cffc92d8ec67e532fcb4f171d076fa98593b6384be3bbf15cc8bfc53"
+    },
+    {
+      "path": "tests/fixtures/image_qwen_image_2_1_image_edit.json",
+      "size_bytes": 96742,
+      "sha256": "1f7130b2479f264da98a65677623d0cedd83b52eddbd6f397015a5dcff755305"
+    },
+    {
+      "path": "tests/fixtures/image_z_image_turbo.json",
+      "size_bytes": 30491,
+      "sha256": "04e34c77bf2304f9cfea972db0c02e3fef3ffae88e59406e0121a58d7c48b9cd"
+    },
+    {
+      "path": "tests/fixtures/video_minimax_h3_i2v.json",
+      "size_bytes": 72076,
+      "sha256": "67027818e272feae781e31ec6fc405cabf6a4d27a206fa8bf96070c6e27ff082"
+    },
+    {
+      "path": "tests/fixtures/video_wan21_scail2_character_replacement.json",
+      "size_bytes": 239783,
+      "sha256": "6eaaf6febd683ec8624ffe7ba54f9f9e866412f0c87cf246d3de97e9cf47e090"
+    },
+    {
+      "path": "tests/test_archive_receipts.py",
+      "size_bytes": 9981,
+      "sha256": "49ed376742b9bbec7918a18eac00d0ec10b80cbc2c8c7fedf751979ab9df3cba"
+    },
+    {
+      "path": "tests/test_capabilities.py",
+      "size_bytes": 18229,
+      "sha256": "37a3dcd9db58783b2c798baa64cb39f26aa80a36752ffac4d851781cdd25ba33"
+    },
+    {
+      "path": "tests/test_capsule.py",
+      "size_bytes": 12615,
+      "sha256": "ca401fc91b8f757397e1a206560d9486bde3e45151273a8d547ef14ad0941ed5"
+    },
+    {
+      "path": "tests/test_comfy_extension.py",
+      "size_bytes": 27180,
+      "sha256": "3498ff156f7ab1990fd23a2e8213bb6f4fb4969d79a4d68bd8e52136a93e2c21"
+    },
+    {
+      "path": "tests/test_comfy_frontend.cjs",
+      "size_bytes": 51265,
+      "sha256": "4c0d1545c5fd3cef3f0df9222e1644dc1f5f0767e8a3d5021444c61b938704bc"
+    },
+    {
+      "path": "tests/test_comparison.py",
+      "size_bytes": 4823,
+      "sha256": "d607585ed82b053a9731b40dde984b93021c9d741f227b8c4ac18d5ca620b1d8"
+    },
+    {
+      "path": "tests/test_comparison_frontend.cjs",
+      "size_bytes": 5044,
+      "sha256": "6f7f7d68a19f97aeca8ceebd20380d1870c1ebd3f833afdd8c18fd78f8aa7941"
+    },
+    {
+      "path": "tests/test_inspect.py",
+      "size_bytes": 10149,
+      "sha256": "1df26cd6c4b70ff8fa548671b87afcb99f5f7dcd0e500ff2231e3b6a289fc120"
+    },
+    {
+      "path": "tests/test_install.py",
+      "size_bytes": 15808,
+      "sha256": "d52440a21d02c911834bb270f26327c56ec14d2a6cb504de30044f56fdde6623"
+    },
+    {
+      "path": "tests/test_installation_history.py",
+      "size_bytes": 15319,
+      "sha256": "e2c7051fb440f1cc82c74aec2cf994808f0097a0074b48d9d2e8c436d79a6ce8"
+    },
+    {
+      "path": "tests/test_local_test.py",
+      "size_bytes": 19428,
+      "sha256": "019334bd5e7d067835f7f96a93ec7d518ff3e412748f3ed0aaa2a35237131896"
+    },
+    {
+      "path": "tests/test_managed_download.py",
+      "size_bytes": 5480,
+      "sha256": "f09a6652b15abd2bb5329de9c3e1f4228fb986bcb2452f371393103bafae2d71"
+    },
+    {
+      "path": "tests/test_nodes.py",
+      "size_bytes": 10338,
+      "sha256": "c5963e2cda0e4a9d2ba9d1633b578ebfc132544611b3382abf949950ae67b30e"
+    },
+    {
+      "path": "tests/test_pack.py",
+      "size_bytes": 11927,
+      "sha256": "1474c559d548439591a30fbfa3191a1ea034001b5b8403220273c2bcc322a82c"
+    },
+    {
+      "path": "tests/test_package_manager.py",
+      "size_bytes": 14356,
+      "sha256": "6997fdc20a78ab39d3bdd3ba23c8b5317c27e8888f62f8253cbaf35d6e26d042"
+    },
+    {
+      "path": "tests/test_permutation.py",
+      "size_bytes": 22529,
+      "sha256": "2ab553bef50be89ce978c4877f0a5331394face3b82139273fca12754400df1d"
+    },
+    {
+      "path": "tests/test_permutation_frontend.cjs",
+      "size_bytes": 4617,
+      "sha256": "c4d1a62c50ecf008d83627536d83e7419e4b5010994dc6056137154d072bb067"
+    },
+    {
+      "path": "tests/test_readiness.py",
+      "size_bytes": 11207,
+      "sha256": "9fccc8ce8594ed42d85565ba127b3afc0315a20253f0caf068c2c6d459a74804"
+    },
+    {
+      "path": "tests/test_repository.py",
+      "size_bytes": 27064,
+      "sha256": "6bae22f8421727bc10bf74212e50d20d2f201167608cba3ef4ad4b7008a7623e"
+    },
+    {
+      "path": "tests/test_runtime.py",
+      "size_bytes": 11644,
+      "sha256": "12524c0abd13474cbd75e83e3f81d73856e9006c7d2f2c9ff380e25f9b04e4ba"
+    },
+    {
+      "path": "tests/test_sdk_execution.py",
+      "size_bytes": 12253,
+      "sha256": "4ca8dd7bee40a0a597da15ea2f95a4505328a5175fe4cd04ea5afbe99ed43d1f"
+    },
+    {
+      "path": "tests/test_starter_catalog.py",
+      "size_bytes": 4130,
+      "sha256": "00e6c12fc5c063801af2f83c40043b257e564dc041fc2896cb85822b5c5896d4"
+    },
+    {
+      "path": "tests/test_storefront.py",
+      "size_bytes": 30128,
+      "sha256": "e60a116463016eaecbfdd0c28b300c5fd8ceda95e8bcd93033e7930c750ede08"
+    },
+    {
+      "path": "tests/test_storefront_adapter.cjs",
+      "size_bytes": 3574,
+      "sha256": "92853d2e5a4fd75ab5e7e3ff04608bbea395f077fa14942a72199b8fbb432ec0"
+    },
+    {
+      "path": "tests/test_storefront_prompt.cjs",
+      "size_bytes": 2861,
+      "sha256": "f011ab9399058f28840c5e7fbfff302aea485893df6d8b71ca0b4249a8533f2f"
+    },
+    {
+      "path": "third_party/PyYAML-MIT.txt",
+      "size_bytes": 1101,
+      "sha256": "8d3928f9dc4490fd635707cb88eb26bd764102a7282954307d3e5167a577e8a4"
+    },
+    {
+      "path": "third_party/workflow_templates-MIT.txt",
+      "size_bytes": 1074,
+      "sha256": "5dccd61c80c847cd6b22fa98124010163ab8646e573557a16a5cae31122f2056"
+    },
+    {
+      "path": "workflows/image_z_image_turbo.json",
+      "size_bytes": 30491,
+      "sha256": "04e34c77bf2304f9cfea972db0c02e3fef3ffae88e59406e0121a58d7c48b9cd"
+    }
+  ],
+  "license_change": {
+    "authorized_by": "Cody",
+    "scope": "CBI-owned project code; root license, package metadata and existing project SPDX headers",
+    "version": "GPL-3.0-only",
+    "other_license_information": "confirmed by Cody",
+    "third_party_notices_preserved": true,
+    "original_workflow_bytes_preserved": true
+  },
+  "resolved_review_items": {
+    "basis": "Cody confirms the other license information; owner clarification preserved in release review",
+    "items": [
+      "project/design/asset ownership and permissions",
+      "workflow/fixture attribution and license information",
+      "model/dependency license information",
+      "project license decision: GPL-3.0-only"
+    ]
+  }
+}
