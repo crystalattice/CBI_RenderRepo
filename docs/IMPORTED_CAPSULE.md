@@ -1,0 +1,9 @@
+# Preserve an upstream workflow as a capsule
+
+Import an ordinary Comfy editor JSON through Explore → Import workflow. After review, the detail page’s Original workflow → RR capsule section can open the original graph in Comfy without installing dependencies. Opening does not queue or run it. Missing models and target uncertainties remain visible and do not prevent preserving a recipe.
+
+Enter a new capsule name/version and the upstream repository URL, full commit revision and file path. Save original as RR capsule creates a new predecessor-linked capsule using the existing RenderRepo S4 profile, with the exact imported workflow bytes and user-recorded provenance. The reference is not independently authenticated by RR; match it against your upstream download. Existing capsules are never overwritten. The original import stays sealed.
+
+The inspector shows the original JSON beside the actual archive member inventory and capsule descriptor, and compares source/workflow SHA-256. It also exposes capsule, payload and archive hashes. These are distinct: workflow hashes exact JSON file bytes; payload hashes the canonical file inventory with its domain prefix; capsule hashes the canonical descriptor with its own sha256 field excluded and its domain prefix; archive hashes exact ZIP bytes. See S4_CAPSULE.md for the precise canonicalization rules. JSON is serialization, not the source of capsule semantics. S4 cross-application metadata remains reserved/null.
+
+Models are references, not bundled weights. This operation creates no catalog, installation receipt, model copy/download, graph execution, or hardware/performance qualification. Target observations stay outside portable claims. The pinned upstream regression fixture is unchanged Comfy-Org workflow_templates/templates/image_z_image_turbo.json at 67984637eefcd4825dcf5c134e39034785be1682; the existing upstream MIT notice applies.

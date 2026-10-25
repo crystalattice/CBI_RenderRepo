@@ -36,3 +36,5 @@ nav{padding:24px 12px}nav button{min-height:46px;font-size:15px;gap:12px;padding
 /* Embedded live storefront: review scaffolding removed. */
 .store{height:calc(100dvh - 16px);margin:8px;min-height:0}pre{white-space:pre-wrap;overflow-wrap:anywhere}input,select{max-width:100%}
 @media(max-width:760px){.store{height:100dvh;margin:0}}
+
+.original-capsule{margin-top:24px;border-top:1px solid var(--border,#344453);padding-top:20px}.original-capsule label{display:block;margin:10px 0}.original-capsule input{display:block;width:100%}.capsule-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}.capsule-columns pre{max-height:420px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}#capsule-comparison p{overflow-wrap:anywhere}@media(max-width:700px){.capsule-columns{grid-template-columns:1fr}}

@@ -1,4 +1,5 @@
 'use strict';
+let initialReady=false;
 const ACTIONS=[['explore','Explore','explore'],['create','Create Image','create'],['edit','Edit Image','instructions'],['resize','Resize & Crop','resize'],['combine','Combine Images','combine'],['video','Create Video','video'],['installed','My Workflows','workflows'],['manage','Manage','manage']];
 const $=id=>document.getElementById(id), main=$('main'), nav=$('navigation');
 function node(tag,text,parent,attrs={}){const e=document.createElement(tag);if(text!==null&&text!==undefined)e.textContent=text;for(const [k,v] of Object.entries(attrs)){if(k==='class')e.className=v;else e.setAttribute(k,v);}parent?.append(e);return e;}
@@ -26,7 +27,7 @@ function renderWorkflowPrompts(w,parent){
   node('p',prompt.value,section,{class:'workflow-prompt-value',style:'white-space:pre-wrap;overflow-wrap:anywhere'});
  }
 }
-function renderDetail(w){button('← Back',main,back,{class:'back',id:'back'});const h=node('div',null,main,{class:'workflow-title'});node('p',ACTIONS.find(a=>a[0]===state.destination)?.[1],h,{class:'eyebrow'});node('h1',w.name,h,{id:'workflow-name',tabindex:'-1'});node('p',w.purpose,h);const grid=node('div',null,main,{class:'detail-grid'}),body=node('div',null,grid,{class:'detail-body'});node('aside',null,grid,{id:'install-panel',class:'install-panel','aria-label':'Installation and environment'});const preview=node('div',null,body,{class:'preview','aria-label':'Preview unavailable'});let labels=w.images.required===null?['Unidentified inputs','Output unknown']:w.images.required===0?['Text prompt',w.output]:w.images.required===2?['Image 1','Image 2','Output preview']:w.optionalImageLabel?['Starting image','Optional last frame','Video output']:['Input example','Output preview'];for(const label of labels){const box=node('div',null,preview,{class:'preview-box'});iconNode(w.icon||'unknown',box,'preview-icon');node('span',label,box);}node('span','Preview not supplied · workflow results unknown',preview,{class:'preview-label'});const f=node('div',null,body,{class:'facts'});facts('You provide',w.provide,f);facts('You can adjust',w.controls,f);renderWorkflowPrompts(w,body);const out=node('div',null,body,{class:'produces'});node('h2','Produces',out);node('p',w.output,out);if(w.automatic){const a=node('div',null,body,{class:'automatic'});node('p',w.automatic,a);}renderTechnical(w,body);renderPanel(w);}
+function renderDetail(w){button('← Back',main,back,{class:'back',id:'back'});const h=node('div',null,main,{class:'workflow-title'});node('p',ACTIONS.find(a=>a[0]===state.destination)?.[1],h,{class:'eyebrow'});node('h1',w.name,h,{id:'workflow-name',tabindex:'-1'});node('p',w.purpose,h);const grid=node('div',null,main,{class:'detail-grid'}),body=node('div',null,grid,{class:'detail-body'});node('aside',null,grid,{id:'install-panel',class:'install-panel','aria-label':'Installation and environment'});const preview=node('div',null,body,{class:'preview','aria-label':'Preview unavailable'});let labels=w.images.required===null?['Unidentified inputs','Output unknown']:w.images.required===0?['Text prompt',w.output]:w.images.required===2?['Image 1','Image 2','Output preview']:w.optionalImageLabel?['Starting image','Optional last frame','Video output']:['Input example','Output preview'];for(const label of labels){const box=node('div',null,preview,{class:'preview-box'});iconNode(w.icon||'unknown',box,'preview-icon');node('span',label,box);}node('span','Preview not supplied · workflow results unknown',preview,{class:'preview-label'});const f=node('div',null,body,{class:'facts'});facts('You provide',w.provide,f);facts('You can adjust',w.controls,f);renderWorkflowPrompts(w,body);const out=node('div',null,body,{class:'produces'});node('h2','Produces',out);node('p',w.output,out);if(w.automatic){const a=node('div',null,body,{class:'automatic'});node('p',w.automatic,a);}renderTechnical(w,body);renderOriginalCapsule(w,main);renderPanel(w);}
 function actionButton(label,w,fn,disabled=false){const b=button(label,$('install-panel'),fn,{class:'primary',id:'primary-action','data-primary':'','aria-label':label});b.disabled=disabled;return b;}
 function check(label,parent,id,value,fn){const l=node('label',null,parent,{class:'check'}),c=node('input',null,l,{type:'checkbox',id});c.checked=value;c.onchange=()=>fn(c.checked);node('span',label,l);return c;}
 function showDialog(title,build){const d=$('dialog');const restore=document.activeElement;d.replaceChildren();node('h2',title,d,{id:'dialog-title'});build(d,()=>d.close());d.onclose=()=>restore?.focus({preventScroll:true});d.showModal();}
@@ -221,6 +222,33 @@ async function handoff(w){
  const job=currentJob(w),path=job?.workflow_available?'/workflow/'+job.session:'/installed-workflow?name='+encodeURIComponent(w.packageName);
  const graph=await RR.json(path);await hostRequest('open',{graph});toast('Workflow opened in Comfy. Choose inputs, then press Run.');
 }
+const capsuleExports=new Map();
+function renderOriginalCapsule(w,parent){
+ const r=reviews.get(w.id);if(!r?.imported_workflow)return;
+ const section=node('section',null,parent,{class:'original-capsule'});
+ node('h2','Original workflow → RR capsule',section);
+ node('p','Open the reviewed source without installing or running it. Create a new capsule from the original uploaded bytes, not the editor serialization.',section);
+ button('Open original in ComfyUI',section,()=>act(async()=>{const graph=await RR.json('/original/'+r.session);await hostRequest('open',{graph});}));
+ const fields={};
+ for(const [key,label,value] of [['name','New capsule name',w.packageName+'-capsule'],['version','Capsule version','0.1.0'],['repository','Upstream repository URL',''],['revision','Upstream commit revision',''],['path','Upstream file path','']]){
+  const labelNode=node('label',label,section);fields[key]=node('input',null,labelNode,{type:'text','data-capsule-field':key});fields[key].value=value;
+ }
+ node('p','Provenance is your recorded source reference; RR does not authenticate that upstream reference. Target availability, execution and hardware findings remain outside portable claims.',section,{class:'muted'});
+ const save=button('Save original as RR capsule',section,()=>act(async()=>{
+  save.disabled=true;try{const result=await RR.json('/capsule/'+r.session,Object.fromEntries(Object.entries(fields).map(([k,v])=>[k,v.value])));capsuleExports.set(w.id,result);render();$('capsule-comparison')?.scrollIntoView({block:'start'});}finally{save.disabled=false;}
+ }));
+ const result=capsuleExports.get(w.id);if(!result)return;
+ const comparison=node('section',null,section,{id:'capsule-comparison'});node('h2','Original JSON beside capsule contents',comparison);
+ node('p',result.byte_identical?'Byte-for-byte identical workflow payload':'Workflow bytes differ',comparison,{class:'capsule-byte-result'});
+ node('p',result.capsule.format+' · profile '+result.capsule.profile+' · schema '+result.capsule.schema_version+' · '+result.manifest.name+' '+result.manifest.version,comparison);
+ node('p','Source SHA-256: '+result.source_sha256,comparison);node('p','Capsule workflow SHA-256: '+result.workflow_sha256,comparison);
+ node('p','Capsule identity SHA-256: '+result.capsule.sha256,comparison);node('p','Payload SHA-256: '+result.capsule.payload_sha256,comparison);node('p','Archive SHA-256: '+result.archive_sha256,comparison);
+ node('p','JSON is the serialization. The RenderRepo profile defines capsule identity, schema version, provenance and deterministic hashes. A changed package creates a predecessor-linked revision; the capsule hash excludes its own sha256 field. S4 cross-application metadata remains reserved, not middleware.',comparison);
+ const columns=node('div',null,comparison,{class:'capsule-columns'}),left=node('section',null,columns),right=node('section',null,columns);
+ node('h3','Original upstream JSON',left);node('pre',result.original_json,left,{class:'capsule-source'});
+ node('h3','Capsule archive contents',right);node('pre',result.contents.map(x=>x.path+' · '+x.size_bytes+' bytes').join('\n'),right);node('h3','capsule.json',right);node('pre',JSON.stringify(result.capsule,null,2),right,{class:'capsule-descriptor'});
+ button('Download capsule archive',comparison,()=>act(async()=>{const blob=await(await RR.request('/capsule/'+r.session+'/archive')).blob(),url=URL.createObjectURL(blob),a=node('a',null);a.href=url;a.download=result.name;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);}));
+}
 function renderInstalled(){
  const installed=rows.filter(isInstalled).filter(w=>matches(w,state.query));title('My Workflows','Installed in '+targetName()+'. Opening does not run a workflow.',installed.length);
  const list=node('div',null,main,{class:'installed-list'});
@@ -258,13 +286,15 @@ function renderImport(body){
  const c=manageCard('Import a workflow',body);node('p','Inspect Comfy editor JSON or an RR package (up to 64 MiB). Inspection does not install dependencies or execute the workflow.',c);
  const types=node('div',null,c,{class:'import-types'});for(const [type,label] of [['json','Comfy workflow JSON'],['package','RR package'],['url','Direct package URL']])button(label,types,()=>{importType=type;render();},{'aria-pressed':String(importType===type),'data-import-type':type});
  const label=node('label',importType==='url'?'Package URL':'Workflow file',c),input=node('input',null,label,importType==='url'?{type:'url',id:'import-url'}:{type:'file',id:'import-file',accept:importType==='json'?'.json':'.rrpkg'});
+ input.disabled=!initialReady;
+ if(!initialReady)node('p','Loading existing sources and history…',c,{class:'muted'});
  const submit=button('Prepare workflow',c,()=>act(async()=>{
   submit.disabled=true;
   try{let r;if(importType==='url')r=await RR.repositoryOperation(await RR.json('/package-link',{url:input.value}),toast);
    else{const file=input.files?.[0];if(!file)throw new Error('Choose a file.');if(file.size>64*1024*1024)throw new Error('File exceeds 64 MiB.');r=await RR.json('/preview',file,true);}
    const w=RR.summary({...r.manifest,capabilities:r.capabilities,source:r.source});rows.push(w);applyReview(w,r);state.destination='explore';openDetail(w);
   }finally{submit.disabled=false;}
- }),{id:'prepare-import'});
+ }),{id:'prepare-import'});submit.disabled=!initialReady;
  const e=manageCard('Export',body);node('p','Export the current Comfy editor graph using the existing package exporter.',e);
  const n=node('label','Package name',e),name=node('input',null,n,{id:'export-name'}),v=node('label','Version',e),version=node('input',null,v,{id:'export-version'});version.value='0.1.0';
  node('p','Custom-node repositories and bundled inputs must be selected explicitly.',e);
@@ -286,12 +316,16 @@ async function restore(session){
  if(!w){w=RR.summary({...m,source:'Retained installation',capabilities:job.capabilities});w.id='session:'+session;rows.push(w);}
  if(['reviewed','needs_review'].includes(job.state)){applyReview(w,await RR.json('/review/'+session,job.options||{}));}else operations.set(w.id,{...job,session});state.destination='explore';openDetail(w);if(job.state==='running'||job.worker_active)watch(w,session);
 }
+function renderRefreshed(){
+ // Both the refresh and its initial completion must preserve a selected file.
+ if(!(state.destination==='manage'&&state.manage==='import'&&$('import-file')?.files?.length))render();
+}
 async function refresh(){
  const [config,repo]=await Promise.all([RR.json('/config'),RR.json('/repositories')]);configuration=config;repositories=repo;history=config.installations||[];
  const keep=rows.filter(w=>reviews.has(w.id)||operations.has(w.id)||!w.raw.repository);
  rows=(repo.packages||[]).map(RR.summary);for(const w of keep){const i=rows.findIndex(x=>x.id===w.id);if(i<0)rows.push(w);else rows[i]=w;}
  for(const item of repo.installed||[]){if(!rows.some(w=>isSameInstalled(w,item)&&isInstalled(w))){const w=RR.summary({...item,source:item.source});rows.push(w);}}
- render();
+ renderRefreshed();
 }
 function isSameInstalled(w,item){return w.packageName===item.name&&w.version===item.version&&(!item.source||w.raw.repository===item.source||w.raw.source===item.source);}
 function render(){navRender();$('environment').textContent=targetName();$('search').value=state.query;main.replaceChildren();if(state.route==='detail'&&workflow(state.detail))renderDetail(workflow(state.detail));else if(state.destination==='installed')renderInstalled();else if(state.destination==='manage')renderManage();else renderCatalog();renderStrip();}
@@ -301,4 +335,4 @@ $('close').onclick=()=>{if(parent!==window)hostRequest('close').catch(error=>toa
 $('reopen').onclick=()=>{$('store').hidden=false;$('closed').hidden=true;render();};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('store').classList.contains('menu-open'))setMenu(false);});
 try{const saved=JSON.parse(localStorage.getItem('renderrepo-storefront-preferences'));if(ACTIONS.some(a=>a[0]===saved?.destination))state.destination=saved.destination;if(['sources','history','import','analysis','advanced'].includes(saved?.manage))state.manage=saved.manage;}catch{}
-render();act(async()=>{await refresh();for(const entry of history.filter(e=>e.state==='running'||e.worker_active)){const job=await RR.json('/status/'+entry.session),w=RR.summary({...job.manifest,source:'Retained installation',capabilities:job.capabilities});w.id='session:'+entry.session;rows.push(w);operations.set(w.id,{...job,session:entry.session});watch(w,entry.session);}render();});
+render();act(async()=>{await refresh();for(const entry of history.filter(e=>e.state==='running'||e.worker_active)){const job=await RR.json('/status/'+entry.session),w=RR.summary({...job.manifest,source:'Retained installation',capabilities:job.capabilities});w.id='session:'+entry.session;rows.push(w);operations.set(w.id,{...job,session:entry.session});watch(w,entry.session);}initialReady=true;renderRefreshed();});

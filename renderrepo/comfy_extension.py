@@ -709,6 +709,82 @@ class PackageUI:
         self.persist(session)
         return await self.review(result['session'],{})
 
+    def imported_original(self, token):
+        session = self.get(token)
+        imported = session.get('imported_workflow')
+        path = session['directory'] / 'original-workflow.json'
+        if not imported or path.is_symlink() or not path.is_file():
+            raise ValueError('Choose a reviewed raw-JSON import.')
+        raw = path.read_bytes()
+        if hashlib.sha256(raw).hexdigest() != imported.get('sha256'):
+            raise ValueError('Original workflow changed; import the source again.')
+        load_package(session['package'])  # Verify the sealed import before opening/exporting.
+        if (session['package'] / session['manifest']['workflow']).read_bytes() != raw:
+            raise ValueError('Package workflow differs from the original import.')
+        return raw
+
+    def save_imported_capsule(self, token, values):
+        from .capsule import copy_capsule, verify
+        from .pack import relative_path
+        if not isinstance(values, dict) or set(values) != {'name', 'version', 'repository', 'revision', 'path'}:
+            raise ValueError('Supply capsule name/version and the upstream repository, pinned revision and path.')
+        for key in ('name', 'version'):
+            if not isinstance(values[key], str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,119}', values[key]):
+                raise ValueError('Capsule name/version must be safe nonempty identifiers.')
+        repo = values['repository']
+        if not isinstance(repo, str) or len(repo) > 2048:
+            raise ValueError('Supply an HTTPS upstream repository URL.')
+        parsed = urlsplit(repo)
+        if parsed.scheme != 'https' or not parsed.hostname or parsed.username or parsed.password or parsed.query or parsed.fragment:
+            raise ValueError('Supply a credential-free HTTPS upstream repository URL.')
+        revision = values['revision']
+        if not isinstance(revision, str) or not re.fullmatch(r'[0-9a-f]{40}|[0-9a-f]{64}', revision):
+            raise ValueError('Supply a full immutable upstream commit revision.')
+        source_path = relative_path(values['path'])
+        raw = self.imported_original(token)
+        session = self.get(token)
+        if session['state'] == 'running':
+            raise ValueError('Wait for the current operation before saving a capsule.')
+        directory = session['directory'] / 'capsule-exports'
+        if directory.is_symlink():
+            raise ValueError('Capsule exports must be an installation-local directory.')
+        directory.mkdir(exist_ok=True)
+        output = directory / (values['name'] + '-' + values['version'] + '.rrpkg')
+        record = {'kind': 'upstream-workflow', 'repository': repo, 'revision': revision,
+                  'path': source_path, 'sha256': hashlib.sha256(raw).hexdigest(),
+                  'basis': 'User-supplied upstream reference; original imported bytes preserved. Not independent upstream authentication.'}
+        def edit(folder):
+            manifest = load_package(folder)
+            manifest.update(name=values['name'], version=values['version'])
+            (folder / 'manifest.yaml').write_text(json.dumps(manifest, sort_keys=True, indent=2) + '\n')
+        copy_capsule(session['package'], output, edit=edit, provenance={'source_records': [record]})
+        with package_directory(output) as folder:
+            manifest = load_package(folder)
+            descriptor = verify(folder, manifest)
+            stored = (folder / manifest['workflow']).read_bytes()
+            if stored != raw:
+                raise ValueError('Export did not preserve original workflow bytes.')
+            contents = [{'path': p.relative_to(folder).as_posix(), 'size_bytes': p.stat().st_size}
+                        for p in sorted(folder.rglob('*')) if p.is_file()]
+        result = {'name': output.name, 'source_sha256': hashlib.sha256(raw).hexdigest(),
+                  'workflow_sha256': hashlib.sha256(stored).hexdigest(), 'byte_identical': stored == raw,
+                  'archive_sha256': hashlib.sha256(output.read_bytes()).hexdigest(),
+                  'contents': contents, 'capsule': descriptor, 'original_json': raw.decode('utf-8'),
+                  'manifest': manifest}
+        session['capsule_export'] = result
+        self.persist(session)
+        return result
+
+    def imported_capsule_archive(self, token):
+        session = self.get(token)
+        name = (session.get('capsule_export') or {}).get('name', '')
+        if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]*\.rrpkg', name):
+            raise ValueError('Create an original-workflow capsule first.')
+        path = session['directory'] / 'capsule-exports' / name
+        if path.is_symlink() or not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != session['capsule_export']['archive_sha256']:
+            raise ValueError('Saved capsule changed; create a new capsule revision.')
+        return path
+
     async def resolve_requirement(self, token, values):
         async with self.preparation_lock:
             return await self._resolve_requirement(token, values)
@@ -1317,6 +1393,21 @@ def register(routes, folder_paths):
         if data.lstrip().startswith((b'{',b'[')):
             return web.json_response(await ui.preview_workflow(data, unquote(request.headers.get('X-RenderRepo-Filename','workflow.json'))))
         return web.json_response(await ui.preview(data, {}))
+
+    @route('get', '/original/{token}')
+    async def original_workflow(request):
+        return web.Response(body=ui.imported_original(request.match_info['token']), content_type='application/json')
+
+    @route('post', '/capsule/{token}')
+    async def save_original_capsule(request):
+        values = json.loads(await body(request))
+        async with ui.preparation_lock:
+            return web.json_response(await asyncio.to_thread(ui.save_imported_capsule, request.match_info['token'], values))
+
+    @route('get', '/capsule/{token}/archive')
+    async def original_capsule_archive(request):
+        path = ui.imported_capsule_archive(request.match_info['token'])
+        return web.FileResponse(path, headers={'Content-Disposition': 'attachment; filename="' + path.name + '"'})
 
     @route('post', '/local-files')
     async def local_files(request):
