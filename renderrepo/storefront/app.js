@@ -21,7 +21,7 @@ function renderWorkflowPrompts(w,parent){
  const section=node('section',null,parent,{'aria-label':'Current workflow prompt'});
  node('h2','Current workflow prompt',section);
  const prompts=RR.promptValues(w.capabilities);
- if(!prompts.length)node('p','No prompt value is embedded.',section);
+ if(!prompts.length)node('p','No embedded prompt value was resolved. The workflow may still contain one.',section);
  for(const prompt of prompts){
   if(prompts.length>1)node('p',prompt.label,section);
   node('p',prompt.value,section,{class:'workflow-prompt-value',style:'white-space:pre-wrap;overflow-wrap:anywhere'});

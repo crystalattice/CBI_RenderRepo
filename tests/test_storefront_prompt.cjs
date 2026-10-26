@@ -31,10 +31,22 @@ test('detail displays verbatim outer prompt including punctuation and whitespace
  assert.equal(result.output.find(n=>n.tag==='h2').text,'Current workflow prompt');
  assert.equal(fs.readFileSync(path.join(__dirname,'fixtures/image_z_image_turbo.json')).compare(fixture),0);
 });
-test('detail explicitly reports absent embedded prompt values',()=>{
+test('detail labels unresolved embedded prompt values without claiming absence',()=>{
  const graph=JSON.parse(fixture);graph.nodes.find(n=>graph.definitions.subgraphs.some(s=>s.id===n.type)).widgets_values_named.text='';
  const result=render(graph);
- assert.ok(result.output.some(n=>n.text==='No prompt value is embedded.'));
+ assert.ok(result.output.some(n=>n.text==='No embedded prompt value was resolved. The workflow may still contain one.'));
  assert.ok(!result.output.some(n=>n.attrs.class==='workflow-prompt-value'));
- assert.ok(render({nodes:[{id:1,type:'SaveImage'}],links:[]}).output.some(n=>n.text==='No prompt value is embedded.'));
+ assert.ok(render({nodes:[{id:1,type:'SaveImage'}],links:[]}).output.some(n=>n.text==='No embedded prompt value was resolved. The workflow may still contain one.'));
+});
+
+test('pinned upstream inner-default limitation is labeled unresolved, not absent',()=>{
+ const source=path.join(__dirname,'fixtures/upstream_z_image_turbo_67984637.json');
+ const bytes=fs.readFileSync(source),graph=JSON.parse(bytes);
+ const encoder=graph.definitions.subgraphs.flatMap(s=>s.nodes).find(n=>n.type==='CLIPTextEncode');
+ assert.ok(encoder.widgets_values.some(v=>typeof v==='string'&&v.length>0));
+ const result=render(graph);
+ assert.ok(!result.output.some(n=>n.attrs.class==='workflow-prompt-value'));
+ assert.ok(result.output.some(n=>n.text==='No embedded prompt value was resolved. The workflow may still contain one.'));
+ assert.ok(!result.output.some(n=>n.text==='No prompt value is embedded.'));
+ assert.equal(fs.readFileSync(source).compare(bytes),0);
 });

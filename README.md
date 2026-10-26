@@ -30,14 +30,15 @@ Use a separate environment; no running Comfy, GPU, private files or credentials 
 uv venv --python python3.13 .venv
 uv pip install --python .venv/bin/python ".[test]"
 .venv/bin/python -m unittest discover -s tests -q
-PATH="$PWD/.venv/bin:$PATH" node --test tests/test_storefront_prompt.cjs tests/test_storefront_adapter.cjs tests/test_comfy_frontend.cjs tests/test_comparison_frontend.cjs tests/test_permutation_frontend.cjs
+PATH="$PWD/.venv/bin:$PATH" node --test tests/test_imported_capsule.cjs tests/test_storefront_prompt.cjs tests/test_storefront_adapter.cjs tests/test_comfy_frontend.cjs tests/test_comparison_frontend.cjs tests/test_permutation_frontend.cjs
 .venv/bin/python scripts/verify_release_import.py
 ```
 
-Node.js with its built-in test runner is required for the five frontend suites (Node 22+ recommended; the exact tested version is recorded in the release manifest). `requirements-test.txt` records the tested dependency versions; install it before `uv pip install --no-deps .` to reproduce those versions. [Developer documentation](docs/DEVELOPMENT.md) explains isolated setup and verification boundaries. Test HTTP traffic uses disposable loopback fixtures and tiny synthetic payloads; SDK/execution transports are mocked. The contest graph is never queued by these commands.
+Node.js with its built-in test runner is required for the six frontend suites (Node 22+ recommended; the exact tested version is recorded in the release manifest). `requirements-test.txt` records the tested dependency versions; install it before `uv pip install --no-deps .` to reproduce those versions. [Developer documentation](docs/DEVELOPMENT.md) explains isolated setup and verification boundaries. Test HTTP traffic uses disposable loopback fixtures and tiny synthetic payloads; SDK/execution transports are mocked. The contest graph is never queued by these commands.
 
 ## Contracts and evidence
 
+- [Preserve an upstream JSON as a capsule](docs/IMPORTED_CAPSULE.md) — original bytes, provenance, hashes and current analysis limits
 - [CLI reference](docs/CLI_REFERENCE.md)
 - [Package/index contract](docs/PACKAGE_V0.md) and [local S4 capsule profile](docs/S4_CAPSULE.md)
 - [Additional permutation tooling](docs/PERMUTATION_V0.md), separate from installation
